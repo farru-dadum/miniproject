@@ -34,7 +34,11 @@
             <input type="email" id="email" name="email" required>
             <span class="error" id="emailError">Enter a valid email address</span>
 
-            <button type="submit">Login</button>
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+            <span class="error" id="addressError">Address is required</span>
+
+            <button type="submit">Sign Up</button>
         </form>
     </div>
 
@@ -48,6 +52,7 @@
             const aadhaar = document.getElementById("aadhaar").value.trim();
             const phone = document.getElementById("phone").value.trim();
             const email = document.getElementById("email").value.trim();
+            const address = document.getElementById("address").value.trim();
 
             if (username === "") {
                 document.getElementById("usernameError").style.display = "block";
@@ -89,6 +94,13 @@
                 isValid = false;
             } else {
                 document.getElementById("emailError").style.display = "none";
+            }
+
+            if (address === "") {
+                document.getElementById("addressError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("addressError").style.display = "none";
             }
 
             if (!isValid) {
