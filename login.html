@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>EcoSwap</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="brand-title">EcoSwap</h2>
+        <form id="loginForm" action="#" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <span class="error" id="usernameError">Username is required</span>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <span class="error" id="passwordError">Password must be at least 6 characters</span>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+            <span class="error" id="confirmPasswordError">Passwords do not match</span>
+
+            <label for="aadhaar">Aadhaar Number:</label>
+            <input type="text" id="aadhaar" name="aadhaar" pattern="\d{12}" maxlength="12" required>
+            <span class="error" id="aadhaarError">Aadhaar must be 12 digits</span>
+
+            <label for="phone">Phone Number (Linked with Aadhaar):</label>
+            <input type="tel" id="phone" name="phone" pattern="[6-9]{1}[0-9]{9}" maxlength="10" required>
+            <span class="error" id="phoneError">Enter a valid 10-digit phone number</span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error" id="emailError">Enter a valid email address</span>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            let isValid = true;
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const confirmPassword = document.getElementById("confirm_password").value.trim();
+            const aadhaar = document.getElementById("aadhaar").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+
+            if (username === "") {
+                document.getElementById("usernameError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("usernameError").style.display = "none";
+            }
+
+            if (password.length < 6) {
+                document.getElementById("passwordError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("passwordError").style.display = "none";
+            }
+
+            if (confirmPassword !== password) {
+                document.getElementById("confirmPasswordError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("confirmPasswordError").style.display = "none";
+            }
+
+            if (!/^\d{12}$/.test(aadhaar)) {
+                document.getElementById("aadhaarError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("aadhaarError").style.display = "none";
+            }
+
+            if (!/^[6-9]\d{9}$/.test(phone)) {
+                document.getElementById("phoneError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("phoneError").style.display = "none";
+            }
+
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                document.getElementById("emailError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("emailError").style.display = "none";
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
