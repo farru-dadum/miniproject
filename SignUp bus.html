@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style3.css">
+    <title>Business Sign-Up EcoSwap</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="brand-title">EcoSwap</h2>
+        <form id="businessSignUpForm" action="#" method="POST" novalidate>
+            <label for="business_name">Business Name:</label>
+            <input type="text" id="business_name" name="business_name" required>
+            <span class="error" id="businessNameError">Business name is required</span>
+
+            <label for="registration_number">Business Registration Number:</label>
+            <input type="text" id="registration_number" name="registration_number" required>
+            <span class="error" id="registrationNumberError">Registration number is required</span>
+
+            <label for="gst_number">GST Number:</label>
+            <input type="text" id="gst_number" name="gst_number" pattern="[0-9]{15}" maxlength="15" required>
+            <span class="error" id="gstNumberError">Enter a valid 15-digit GST number</span>
+
+            <label for="business_phone">Business Phone:</label>
+            <input type="tel" id="business_phone" name="business_phone" pattern="[6-9]{1}[0-9]{9}" maxlength="10" required>
+            <span class="error" id="businessPhoneError">Enter a valid 10-digit phone number</span>
+
+            <label for="business_email">Business Email:</label>
+            <input type="email" id="business_email" name="business_email" required>
+            <span class="error" id="businessEmailError">Enter a valid email address</span>
+
+            <label for="business_address">Business Address:</label>
+            <textarea id="business_address" name="business_address" required></textarea>
+            <span class="error" id="businessAddressError">Address is required</span>
+
+            <label for="password">Create Password:</label>
+            <input type="password" id="password" name="password" required>
+            <span class="error" id="passwordError">Password must be at least 6 characters</span>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+            <span class="error" id="confirmPasswordError">Passwords do not match</span>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("businessSignUpForm").addEventListener("submit", function(event) {
+            let isValid = true;
+
+            const businessName = document.getElementById("business_name").value.trim();
+            const registrationNumber = document.getElementById("registration_number").value.trim();
+            const gstNumber = document.getElementById("gst_number").value.trim();
+            const businessPhone = document.getElementById("business_phone").value.trim();
+            const businessEmail = document.getElementById("business_email").value.trim();
+            const businessAddress = document.getElementById("business_address").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const confirmPassword = document.getElementById("confirm_password").value.trim();
+
+            if (businessName === "") {
+                document.getElementById("businessNameError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("businessNameError").style.display = "none";
+            }
+
+            if (registrationNumber === "") {
+                document.getElementById("registrationNumberError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("registrationNumberError").style.display = "none";
+            }
+
+            if (!/^\d{15}$/.test(gstNumber)) {
+                document.getElementById("gstNumberError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("gstNumberError").style.display = "none";
+            }
+
+            if (!/^[6-9]\d{9}$/.test(businessPhone)) {
+                document.getElementById("businessPhoneError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("businessPhoneError").style.display = "none";
+            }
+
+            if (!/\S+@\S+\.\S+/.test(businessEmail)) {
+                document.getElementById("businessEmailError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("businessEmailError").style.display = "none";
+            }
+
+            if (businessAddress === "") {
+                document.getElementById("businessAddressError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("businessAddressError").style.display = "none";
+            }
+
+            if (password.length < 6) {
+                document.getElementById("passwordError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("passwordError").style.display = "none";
+            }
+
+            if (confirmPassword !== password) {
+                document.getElementById("confirmPasswordError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("confirmPasswordError").style.display = "none";
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

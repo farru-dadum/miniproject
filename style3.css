@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:wght@400;600&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #11998e, #38ef7d);
+    color: #ffffff;
+    font-family: 'Lora', serif;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    color: #0e7c49; 
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    width: 90%;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container:hover {
+    transform: scale(1.02);
+}
+
+.brand-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 34px;
+    text-align: center;
+    color: #0e7c49; 
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+label {
+    font-weight: 600;
+    font-size: 14px;
+    width: 100%;
+    text-align: left;
+    color: #085f38; 
+}
+
+input, textarea {
+    width: 95%;
+    padding: 12px;
+    margin: 8px 0 16px 0;
+    border: 2px solid #0e7c49;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Lora', serif;
+    outline: none;
+    transition: 0.3s;
+}
+input:focus, textarea:focus {
+    border-color: #0e7c49;
+    box-shadow: 0px 0px 8px rgba(14, 124, 73, 0.5);
+}
+
+button {
+    width: 90%;
+    padding: 12px;
+    background: #0e7c49;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+button:hover {
+    background: #0b5e3a;
+    transform: scale(1.05);
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    display: none;
+    width: 90%;
+}
