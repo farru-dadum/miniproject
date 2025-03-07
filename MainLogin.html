@@ -3,36 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CusSign.css"> <!-- Keeping your existing CSS -->
     <title>Login - EcoSwap</title>
-    <link rel="stylesheet" href="dropdown.css"> <!-- New CSS file for dropdown styles -->
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <div class="container">
         <h2 class="brand-title">EcoSwap</h2>
-        <h3>Login</h3>
-        <form id="loginForm">
+        <form id="loginForm" action="#" method="POST" novalidate>
+            
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" name="username">
             <span class="error" id="usernameError">Username is required</span>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <span class="error" id="passwordError">Password must be at least 6 characters</span>
+            <input type="password" id="password" name="password">
+            <span class="error" id="passwordError">Password is required</span>
 
-            <!-- 🔥 Bombastic Animated Dropdown -->
-            <label for="userType">Select User Type:</label>
-            <div class="custom-dropdown">
-                <select id="userType" name="userType" required>
-                    <option value="">-- Select Type --</option>
-                    <option value="customer">🛒 Customer</option>
-                    <option value="scrap_collector">♻️ Scrap Collector</option>
-                </select>
-            </div>
-            <span class="error" id="userTypeError">Please select a user type</span>
+            <label for="role">Select Role:</label>
+            <select id="role" name="role">
+                <option value="">-- Select Role --</option>
+                <option value="admin">Scrap Collecter</option>
+                <option value="business">Business Owner</option>
+                <option value="customer">Customer</option>
+            </select>
+            <span class="error" id="roleError">Please select a role</span>
 
             <button type="submit">Login</button>
         </form>
+    </div>
+</body>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    let isValid = true;
+
+    const fields = [
+        { id: "username", error: "usernameError" },
+        { id: "password", error: "passwordError" },
+        { id: "role", error: "roleError" }
+    ];
+
+    fields.forEach(field => {
+        let inputElement = document.getElementById(field.id);
+        let errorElement = document.getElementById(field.error);
+        let value = inputElement.value.trim();
+
+        // Reset error display
+        errorElement.style.display = "none";
+
+        // Check if field is empty
+        if (!value) {
+            errorElement.style.display = "block";
+            isValid = false;
+        }
+    });
+
+    if (!isValid) {
+        event.preventDefault(); // Stop form submission if invalid
+    }
+});
+</script>
+</html>
+
     </div>
 
     <script src="MainLogin.js"></script> <!-- Linking JS file -->
