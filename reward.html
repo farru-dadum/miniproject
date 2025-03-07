@@ -3,39 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reward Page</title>
+    <title>EcoSwap Rewards</title>
     <link rel="stylesheet" href="reward.css">
 </head>
 <body>
     <h1 class="brand-title">EcoSwap Rewards</h1>
     <main class="content-wrapper">
-        <p>Enter your details to claim your rewards!</p>
-        <form id="rewardForm">
-            <label for="userId">User ID:</label>
-            <input type="text" id="userId" name="userId" required>
-            
-            <label for="earnedPoints">Earned Points:</label>
-            <input type="number" id="earnedPoints" name="earnedPoints" required>
-            
-            <button type="submit">Claim Reward</button>
-        </form>
-        <p id="rewardMessage"></p>
+        <p>Enter your User ID to check your rewards!</p>
+        
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required>
+        <button id="fetchScore">Fetch Score</button>
+        
+        <p><strong>Earned Points:</strong> <span id="earnedPoints">-</span></p>
+        <p><strong>Your Reward:</strong> <span id="rewardMessage">-</span></p>
     </main>
 
     <script>
-        document.getElementById("rewardForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
+        document.getElementById("fetchScore").addEventListener("click", async function() {
             const userId = document.getElementById("userId").value;
-            const earnedPoints = document.getElementById("earnedPoints").value;
+            if (!userId) {
+                alert("Please enter your User ID.");
+                return;
+            }
             
-            const response = await fetch("http://localhost:5000/earn-rewards", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ userId, earnedPoints })
-            });
-            
-            const result = await response.json();
-            document.getElementById("rewardMessage").innerText = result.coupon ? `Your reward: ${result.coupon}` : result.error;
+            try {
+                const response = await fetch(`http://localhost:5000/get-user-score/${userId}`);
+                const result = await response.json();
+                document.getElementById("earnedPoints").innerText = result.score || 0;
+                document.getElementById("rewardMessage").innerText = result.coupon || "No coupon available.";
+            } catch (error) {
+                console.error("Error fetching rewards:", error);
+                document.getElementById("rewardMessage").innerText = "Error retrieving data.";
+            }
         });
     </script>
 </body>
