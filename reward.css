@@ -13,24 +13,25 @@ body {
     text-align: center;
 }
 
-/* Keep heading separate */
+/* Brand Title */
 .brand-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 36px;
+    font-size: 40px;
     color: #0e7c49;
     margin-bottom: 20px;
     text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Center the content except the heading */
+/* Container Styling */
 .container {
     background: white;
     color: #0e7c49; /* Dark green for contrast */
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
     max-width: 420px;
-    width: 90%;
+    width: 100%;
     transition: 0.3s;
     display: flex;
     flex-direction: column;
@@ -38,21 +39,7 @@ body {
 }
 
 .container:hover {
-    transform: scale(1.02);
-}
-
-.content-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-    text-align: center;
-}
-
-.brand-title {
-    text-align: center;
-    margin-top: 20px;
+    transform: scale(1.03);
 }
 
 /* Form Styling */
@@ -70,19 +57,20 @@ label {
     width: 100%;
     text-align: left;
     color: #085f38; /* Dark green */
+    margin-top: 10px;
 }
 
 /* Input Fields */
 input {
     width: 95%;
-    padding: 12px;
-    margin: 8px 0 16px 0;
+    padding: 10px;
+    margin: 5px 0 15px 0;
     border: 2px solid #0e7c49;
     border-radius: 8px;
     font-size: 16px;
     font-family: 'Lora', serif;
     outline: none;
-    transition: 0.3s;
+    transition: 0.3s ease-in-out;
 }
 
 input:focus {
@@ -92,7 +80,7 @@ input:focus {
 
 /* Button Styling */
 button {
-    width: 90%;
+    width: 100%;
     padding: 12px;
     background: #0e7c49; /* Green button */
     color: white;
@@ -102,7 +90,7 @@ button {
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 button:hover {
@@ -114,6 +102,22 @@ button:hover {
 #rewardMessage {
     margin-top: 15px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     color: #085f38;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 20px;
+        max-width: 90%;
+    }
+    
+    .brand-title {
+        font-size: 32px;
+    }
+    
+    input, button {
+        width: 100%;
+    }
 }
