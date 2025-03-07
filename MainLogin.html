@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CusSign.css"> <!-- Keeping your existing CSS -->
+    <title>Login - EcoSwap</title>
+    <link rel="stylesheet" href="dropdown.css"> <!-- New CSS file for dropdown styles -->
+</head>
+<body>
+    <div class="container">
+        <h2 class="brand-title">EcoSwap</h2>
+        <h3>Login</h3>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <span class="error" id="usernameError">Username is required</span>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <span class="error" id="passwordError">Password must be at least 6 characters</span>
+
+            <!-- 🔥 Bombastic Animated Dropdown -->
+            <label for="userType">Select User Type:</label>
+            <div class="custom-dropdown">
+                <select id="userType" name="userType" required>
+                    <option value="">-- Select Type --</option>
+                    <option value="customer">🛒 Customer</option>
+                    <option value="scrap_collector">♻️ Scrap Collector</option>
+                </select>
+            </div>
+            <span class="error" id="userTypeError">Please select a user type</span>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script src="MainLogin.js"></script> <!-- Linking JS file -->
+</body>
+</html>
