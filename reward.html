@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reward Page</title>
+    <link rel="stylesheet" href="reward.css">
+</head>
+<body>
+    <h1 class="brand-title">EcoSwap Rewards</h1>
+    <main class="content-wrapper">
+        <p>Enter your details to claim your rewards!</p>
+        <form id="rewardForm">
+            <label for="userId">User ID:</label>
+            <input type="text" id="userId" name="userId" required>
+            
+            <label for="earnedPoints">Earned Points:</label>
+            <input type="number" id="earnedPoints" name="earnedPoints" required>
+            
+            <button type="submit">Claim Reward</button>
+        </form>
+        <p id="rewardMessage"></p>
+    </main>
+
+    <script>
+        document.getElementById("rewardForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const userId = document.getElementById("userId").value;
+            const earnedPoints = document.getElementById("earnedPoints").value;
+            
+            const response = await fetch("http://localhost:5000/earn-rewards", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId, earnedPoints })
+            });
+            
+            const result = await response.json();
+            document.getElementById("rewardMessage").innerText = result.coupon ? `Your reward: ${result.coupon}` : result.error;
+        });
+    </script>
+</body>
+</html>
