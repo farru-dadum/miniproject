@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style3.css">
-    <title>Business Sign-Up EcoSwap</title>
+    <title>Business Sign-Up - EcoSwap</title>
 </head>
 <body>
     <div class="container">
         <h2 class="brand-title">EcoSwap</h2>
+
+        <h3>Business Requirements</h3>
         <form id="businessSignUpForm" action="#" method="POST" novalidate>
+            
             <label for="business_name">Business Name:</label>
             <input type="text" id="business_name" name="business_name" required>
             <span class="error" id="businessNameError">Business name is required</span>
@@ -34,7 +37,33 @@
             <textarea id="business_address" name="business_address" required></textarea>
             <span class="error" id="businessAddressError">Address is required</span>
 
-            <label for="password">Create Password:</label>
+            <label for="business_type">Type of Business:</label>
+            <input type="text" id="business_type" name="business_type" required>
+            <span class="error" id="businessTypeError">Business type is required</span>
+
+            <label for="raw_material">Raw Material Looking For:</label>
+            <input type="text" id="raw_material" name="raw_material" required>
+            <span class="error" id="rawMaterialError">Raw material information is required</span>
+
+            <h3>Representative Details</h3>
+
+            <label for="rep_name">Representative Name:</label>
+            <input type="text" id="rep_name" name="rep_name" required>
+            <span class="error" id="repNameError">Representative name is required</span>
+
+            <label for="rep_role">Role in Organization:</label>
+            <input type="text" id="rep_role" name="rep_role" required>
+            <span class="error" id="repRoleError">Role is required</span>
+
+            <label for="rep_phone">Representative Phone:</label>
+            <input type="tel" id="rep_phone" name="rep_phone" pattern="[6-9]{1}[0-9]{9}" maxlength="10" required>
+            <span class="error" id="repPhoneError">Enter a valid 10-digit phone number</span>
+
+            <h3>User Profile</h3>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <span class="error" id="usernameError">Username is required</span>
+            <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             <span class="error" id="passwordError">Password must be at least 6 characters</span>
 
@@ -45,80 +74,67 @@
             <button type="submit">Sign Up</button>
         </form>
     </div>
-
-    <script>
-        document.getElementById("businessSignUpForm").addEventListener("submit", function(event) {
-            let isValid = true;
-
-            const businessName = document.getElementById("business_name").value.trim();
-            const registrationNumber = document.getElementById("registration_number").value.trim();
-            const gstNumber = document.getElementById("gst_number").value.trim();
-            const businessPhone = document.getElementById("business_phone").value.trim();
-            const businessEmail = document.getElementById("business_email").value.trim();
-            const businessAddress = document.getElementById("business_address").value.trim();
-            const password = document.getElementById("password").value.trim();
-            const confirmPassword = document.getElementById("confirm_password").value.trim();
-
-            if (businessName === "") {
-                document.getElementById("businessNameError").style.display = "block";
-                isValid = false;
-            } else {
-                document.getElementById("businessNameError").style.display = "none";
-            }
-
-            if (registrationNumber === "") {
-                document.getElementById("registrationNumberError").style.display = "block";
-                isValid = false;
-            } else {
-                document.getElementById("registrationNumberError").style.display = "none";
-            }
-
-            if (!/^\d{15}$/.test(gstNumber)) {
-                document.getElementById("gstNumberError").style.display = "block";
-                isValid = false;
-            } else {
-                document.getElementById("gstNumberError").style.display = "none";
-            }
-
-            if (!/^[6-9]\d{9}$/.test(businessPhone)) {
-                document.getElementById("businessPhoneError").style.display = "block";
-                isValid = false;
-            } else {
-                document.getElementById("businessPhoneError").style.display = "none";
-            }
-
-            if (!/\S+@\S+\.\S+/.test(businessEmail)) {
-                document.getElementById("businessEmailError").style.display = "block";
-                isValid = false;
-            } else {
-                document.getElementById("businessEmailError").style.display = "none";
-            }
-
-            if (businessAddress === "") {
-                document.getElementById("businessAddressError").style.display = "block";
-                isValid = false;
-            } else {
-                document.getElementById("businessAddressError").style.display = "none";
-            }
-
-            if (password.length < 6) {
-                document.getElementById("passwordError").style.display = "block";
-                isValid = false;
-            } else {
-                document.getElementById("passwordError").style.display = "none";
-            }
-
-            if (confirmPassword !== password) {
-                document.getElementById("confirmPasswordError").style.display = "block";
-                isValid = false;
-            } else {
-                document.getElementById("confirmPasswordError").style.display = "none";
-            }
-
-            if (!isValid) {
-                event.preventDefault();
-            }
-        });
-    </script>
 </body>
+<script>
+  document.getElementById("businessSignUpForm").addEventListener("submit", function(event) {
+    let isValid = true;
+
+    const fields = [
+        { id: "business_name", error: "businessNameError" },
+        { id: "registration_number", error: "registrationNumberError" },
+        { id: "gst_number", error: "gstNumberError", pattern: /^\d{15}$/ },
+        { id: "business_phone", error: "businessPhoneError", pattern: /^[6-9]\d{9}$/ },
+        { id: "business_email", error: "businessEmailError", pattern: /\S+@\S+\.\S+/ },
+        { id: "business_address", error: "businessAddressError" },
+        { id: "business_type", error: "businessTypeError" },
+        { id: "raw_material", error: "rawMaterialError" },
+        { id: "rep_name", error: "repNameError" },
+        { id: "rep_role", error: "repRoleError" },
+        { id: "rep_phone", error: "repPhoneError", pattern: /^[6-9]\d{9}$/ },
+        { id: "username", error: "usernameError" }, // ✅ Included username
+        { id: "password", error: "passwordError", minLength: 6 },
+        { id: "confirm_password", error: "confirmPasswordError", match: "password" }
+    ];
+
+    fields.forEach(field => {
+        let inputElement = document.getElementById(field.id);
+        let errorElement = document.getElementById(field.error);
+        let value = inputElement.value.trim();
+
+        // Reset error display
+        errorElement.style.display = "none";
+
+        // Check required fields
+        if (!value) {
+            errorElement.style.display = "block";
+            isValid = false;
+        }
+
+        // Check patterns (like phone number, email, GST number)
+        if (field.pattern && !field.pattern.test(value)) {
+            errorElement.style.display = "block";
+            isValid = false;
+        }
+
+        // Check minimum length
+        if (field.minLength && value.length < field.minLength) {
+            errorElement.style.display = "block";
+            isValid = false;
+        }
+
+        // Check password confirmation
+        if (field.match) {
+            let matchValue = document.getElementById(field.match).value.trim();
+            if (value !== matchValue) {
+                errorElement.style.display = "block";
+                isValid = false;
+            }
+        }
+    });
+
+    if (!isValid) {
+        event.preventDefault(); // Stop form submission if invalid
+    }
+});
+</script>
 </html>
