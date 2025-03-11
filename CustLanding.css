@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Manrope:wght@400;600&display=swap');
+* {
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+/* Section1 - top most paert */
+.section1 {
+    min-height: 80px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+/*image of eco swap*/
+.content-box1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 10px;
+    margin: 2px;
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+/* Adjust EcoSwap text */
+.box2 {
+    flex-grow: 0;
+    font-family: 'Irish Grover', cursive;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: black;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    white-space: nowrap;
+}
+
+/*icons*/
+.box3, .box4, .box5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    gap: 15px; /* Adds space between icons */
+}
+
+/* Circular icon styling */
+.content-box1 i {
+    font-size: 1.5rem;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.content-box1 i:hover {
+    transform: scale(1.1); /* Slightly enlarges the icon */
+    background-color: #f0f0f0; /* Light background change on hover */
+}
+
+
+/* Adjust last two boxes with some gap */
+.box6 {
+    flex-grow: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    padding-right: 0px;
+    white-space: nowrap;
+    margin-right: 0px; /* Adds small gap between box6 & box7 */
+}
+
+.box7 {
+    flex-grow: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    white-space: nowrap;
+    border-left: 0.5px solid #878680;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    height: 100px;
+}
+.section1 img {
+    width: 100px; /* Set a fixed width */
+    height: auto; /* Maintains aspect ratio */
+}
+
+
+.section2 {
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+    align-items: center;
+    height: 40px; /* Reduce navbar height */
+    background-color: #E4E2D7; /* Keep original background */
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem; /* Slightly smaller text */
+    padding: 10px 30px; /* Add left padding for spacing */
+    gap: 20px; /* Space between links */
+}
+
+/* Navbar Links */
+.content-box2 {
+    padding: 5px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    font-weight: 550;
+}
+
+/* Hover effect */
+.content-box2:hover {
+    background-color: #d6d4c9;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.section3 {
+    display: flex;
+    align-items: center; 
+    padding: 10px;
+}
+
+/*  Button Styling */
+.add-button {
+    background: linear-gradient(135deg, #0a3d62, #1e5799);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s;
+    box-shadow: 0px 4px 15px rgba(10, 61, 98, 0.6);
+}
+
+.add-button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(30, 87, 153, 0.6), transparent);
+    transition: 0.4s;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.add-button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+}
+
+.add-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 10px 25px rgba(10, 61, 98, 0.8);
+}
+
+.add-button:active {
+    transform: scale(0.95);
+    background: linear-gradient(135deg, #1e5799, #0a3d62);
+}
+
+/* Modal Container */
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background: white; /* Plain white container */
+    padding: 25px;
+    border-radius: 10px;
+    width: 420px;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+/* Modal Heading */
+.modal-content h2 {
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #0a3d62;
+    text-transform: uppercase;
+}
+
+/* Modal Form Labels */
+.modal-content label {
+    display: block;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Modal Input Fields and Textarea */
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+/* Input Focus Effects */
+.modal-content input:focus,
+.modal-content textarea:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 8px rgba(0,123,255,0.5);
+}
+
+/* Geolocation Button */
+#getLocation {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s;
+}
+
+#getLocation:hover {
+    background-color: #0056b3;
+}
+
+/* Submit Button */
+.modal-submit {
+    background: #007BFF;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.modal-submit:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+.modal-submit:active {
+    transform: scale(0.95);
+}
+
+/* Optional: Style for Geolocation Output */
+#geoOutput {
+    margin-top: 10px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+}
