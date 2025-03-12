@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Geolocation</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALj8YR5jztywyF2wasyi0beIwmhC_IIBk"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h2>My Location on Google Maps</h2>
+    <button onclick="getLocation()">Get My Location</button>
+    <div id="map"></div>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
