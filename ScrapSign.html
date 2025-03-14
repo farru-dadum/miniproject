@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/ScrapSign.css">
+    <title>Scrap Collector Sign-Up</title>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="brand-title">EcoSwap</h2>
+        <form id="signupForm" action="#" method="POST" novalidate>
+
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+            <span class="error" id="fullnameError">Full name is required</span>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+            <span class="error" id="addressError">Address is required</span>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+            <span class="error" id="cityError">City is required</span>
+
+            <label for="pincode">Pincode:</label>
+            <input type="text" id="pincode" name="pincode" pattern="\d{6}" maxlength="6" required>
+            <span class="error" id="pincodeError">Pincode must be 6 digits</span>
+
+            <label for="scrap_type">Type of Scrap Collected:</label>
+            <select id="scrap_type" name="scrap_type" required>
+                <option value="">Select Scrap Type</option>
+                <option value="Metal">Metal</option>
+                <option value="Plastic">Plastic</option>
+                <option value="Paper">Paper</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Others">Others</option>
+            </select>
+            <span class="error" id="scrapTypeError">Please select a scrap type</span>
+
+            <label>Do you have a Vehicle?</label>
+            <div class="radio-container">
+                <input type="radio" id="vehicle_yes" name="vehicle" value="Yes" required>
+                <label for="vehicle_yes">Yes</label>
+
+                <input type="radio" id="vehicle_no" name="vehicle" value="No" required>
+                <label for="vehicle_no">No</label>
+            </div>
+            <span class="error" id="vehicleError">Please select an option</span>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <span class="error" id="usernameError">Username is required</span>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <span class="error" id="passwordError">Password must be at least 6 characters</span>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+            <span class="error" id="confirmPasswordError">Passwords do not match</span>
+
+            <label for="aadhaar">Aadhaar Number:</label>
+            <input type="text" id="aadhaar" name="aadhaar" pattern="\d{12}" maxlength="12" required>
+            <span class="error" id="aadhaarError">Aadhaar must be 12 digits</span>
+
+            <label for="phone">Phone Number (Linked with Aadhaar):</label>
+            <input type="tel" id="phone" name="phone" pattern="[6-9]{1}[0-9]{9}" maxlength="10" required>
+            <span class="error" id="phoneError">Enter a valid 10-digit phone number</span>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            let isValid = true;
+    
+            const fullname = document.getElementById("fullname").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const city = document.getElementById("city").value.trim();
+            const pincode = document.getElementById("pincode").value.trim();
+            const scrapType = document.getElementById("scrap_type").value;
+            const vehicle = document.querySelector('input[name="vehicle"]:checked');
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const confirmPassword = document.getElementById("confirm_password").value.trim();
+            const aadhaar = document.getElementById("aadhaar").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+    
+            if (fullname === "") {
+                document.getElementById("fullnameError").innerText = "Full name is required.";
+                document.getElementById("fullnameError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("fullnameError").style.display = "none";
+            }
+    
+            if (address === "") {
+                document.getElementById("addressError").innerText = "Address is required.";
+                document.getElementById("addressError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("addressError").style.display = "none";
+            }
+    
+            if (city === "") {
+                document.getElementById("cityError").innerText = "City is required.";
+                document.getElementById("cityError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("cityError").style.display = "none";
+            }
+    
+            if (!/^\d{6}$/.test(pincode)) {
+                document.getElementById("pincodeError").innerText = "Pincode must be 6 digits.";
+                document.getElementById("pincodeError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("pincodeError").style.display = "none";
+            }
+    
+            if (scrapType === "") {
+                document.getElementById("scrapTypeError").innerText = "Please select a scrap type.";
+                document.getElementById("scrapTypeError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("scrapTypeError").style.display = "none";
+            }
+    
+            if (!vehicle) {
+                document.getElementById("vehicleError").innerText = "Please select an option.";
+                document.getElementById("vehicleError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("vehicleError").style.display = "none";
+            }
+    
+            if (username === "") {
+                document.getElementById("usernameError").innerText = "Username is required.";
+                document.getElementById("usernameError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("usernameError").style.display = "none";
+            }
+    
+            if (password.length < 6) {
+                document.getElementById("passwordError").innerText = "Password must be at least 6 characters.";
+                document.getElementById("passwordError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("passwordError").style.display = "none";
+            }
+    
+            if (confirmPassword !== password) {
+                document.getElementById("confirmPasswordError").innerText = "Passwords do not match.";
+                document.getElementById("confirmPasswordError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("confirmPasswordError").style.display = "none";
+            }
+    
+            if (!/^\d{12}$/.test(aadhaar)) {
+                document.getElementById("aadhaarError").innerText = "Aadhaar must be 12 digits.";
+                document.getElementById("aadhaarError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("aadhaarError").style.display = "none";
+            }
+    
+            if (!/^[6-9]\d{9}$/.test(phone)) {
+                document.getElementById("phoneError").innerText = "Enter a valid 10-digit phone number.";
+                document.getElementById("phoneError").style.display = "block";
+                isValid = false;
+            } else {
+                document.getElementById("phoneError").style.display = "none";
+            }
+    
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>  
+    <script src ="ScrapSign.js"></script>  
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - EcoSwap</title>
+    <link rel="stylesheet" href="css/signup.css"> <!-- Optional CSS file for styling -->
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <select id="signupRole">
+            <option value="">-- Select Role --</option>
+            <option value="customer">Customer</option>
+            <option value="business">Business Owner</option>
+            <option value="scrapcollector">Scrap Collector</option>
+        </select>
+
+        <button id="signupBtn">Sign Up</button>
+    </div>
+
+    <script>
+        document.getElementById("signupBtn").addEventListener("click", function () {
+            const selectedRole = document.getElementById("signupRole").value;
+
+            if (selectedRole === "customer") {
+                window.location.href = "CusSign.html";
+            } else if (selectedRole === "business") {
+                window.location.href = "BusSign.html";
+            } else if (selectedRole === "scrapcollector") {
+                window.location.href = "ScrapSign.html";
+            } else {
+                alert("Please select a role to proceed with sign-up.");
+            }
+        });
+    </script>
+</body>
+</html>

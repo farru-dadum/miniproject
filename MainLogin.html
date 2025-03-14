@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - EcoSwap</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css/MainLogin.css">
 </head>
 <body>
     <div class="container">
         <h2 class="brand-title">EcoSwap</h2>
+        
+        <!-- Login Form -->
         <form id="loginForm" action="#" method="POST" novalidate>
-            
             <label for="username">Username:</label>
             <input type="text" id="username" name="username">
             <span class="error" id="usernameError">Username is required</span>
@@ -19,10 +20,10 @@
             <input type="password" id="password" name="password">
             <span class="error" id="passwordError">Password is required</span>
 
-            <label for="role">Select Role:</label>
-            <select id="role" name="role">
+            <label for="userType">Select Role:</label>
+            <select id="userType" name="userType">
                 <option value="">-- Select Role --</option>
-                <option value="admin">Scrap Collecter</option>
+                <option value="scrapcollector">Scrap Collector</option>
                 <option value="business">Business Owner</option>
                 <option value="customer">Customer</option>
             </select>
@@ -30,37 +31,20 @@
 
             <button type="submit">Login</button>
         </form>
+
+        <!-- Signup Section -->
+        <div class="signup-section">
+            <p>Don't have an account? Sign up below:</p>
+            <select id="signupRole">
+                <option value="">-- Select Role --</option>
+                <option value="customer">Customer</option>
+                <option value="business">Business Owner</option>
+                <option value="scrapcollector">Scrap Collector</option>
+            </select>
+            <button id="signupBtn">Sign Up</button>
+        </div>
     </div>
 </body>
 
-<script>
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-    let isValid = true;
-
-    const fields = [
-        { id: "username", error: "usernameError" },
-        { id: "password", error: "passwordError" },
-        { id: "role", error: "roleError" }
-    ];
-
-    fields.forEach(field => {
-        let inputElement = document.getElementById(field.id);
-        let errorElement = document.getElementById(field.error);
-        let value = inputElement.value.trim();
-
-        // Reset error display
-        errorElement.style.display = "none";
-
-        // Check if field is empty
-        if (!value) {
-            errorElement.style.display = "block";
-            isValid = false;
-        }
-    });
-
-    if (!isValid) {
-        event.preventDefault(); // Stop form submission if invalid
-    }
-});
-</script>
+<script src="MainLogin.js"></script>
 </html>
