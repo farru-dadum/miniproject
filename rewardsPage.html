@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSwap Rewards</title>
+    <link rel="stylesheet" href="css/rewardPage.css">
+</head>
+<body>
+    <h1 class="brand-title">EcoSwap Rewards</h1>
+    
+    <main class="content-wrapper">
+        <p>Enter your Username to check your rewards!</p>
+        
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <button id="fetchScore">Fetch Score</button>
+        
+        <p><strong>Earned Points:</strong> <span id="earnedPoints">-</span></p>
+
+        <!-- ✅ New message section for "Coupon already redeemed" -->
+        <p id="rewardMessage" style="font-weight: bold; color: red;"></p>
+
+        <p><strong>Your Reward:</strong></p>
+        <img id="rewardImage" src="" alt="Reward Coupon" style="display:none; width: 480px; height: auto;">
+    </main>
+
+    <script src="rewardPage.js"></script>
+</body>
+</html>
