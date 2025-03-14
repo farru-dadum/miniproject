@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background & Centering */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #11998e, #38ef7d);
+    font-family: 'Lora', serif;
+    padding: 20px;
+    overflow: auto;
+}
+
+/* Sign-Up Container */
+.signup-container {
+    background: white;
+    color: #0e7c49;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+}
+.signup-container:hover {
+    transform: scale(1.02);
+}
+
+/* Title */
+h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 32px;
+    color: #0e7c49;
+    margin-bottom: 15px;
+}
+
+/* Description Text */
+p {
+    font-size: 14px;
+    color: #085f38;
+    margin-bottom: 10px;
+}
+
+/* Dropdown Menu */
+select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #0e7c49;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-family: 'Lora', serif;
+    outline: none;
+    transition: 0.3s;
+}
+select:focus {
+    border-color: #0e7c49;
+    box-shadow: 0px 0px 8px rgba(14, 124, 73, 0.5);
+}
+
+/* Sign-Up Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #0e7c49;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    background: #0b5e3a;
+    transform: scale(1.05);
+}
+
+/* Error Message (If Needed) */
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: -5px;
+    margin-bottom: 5px;
+    display: none;
+    text-align: left;
+}
