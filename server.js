@@ -102,7 +102,7 @@ app.post("/signup", async (req, res) => {
       !username ||
       !password ||
       !confirm_password ||
-      !aadhaar ||
+      //!aadhaar ||
       !phone 
     ) {
       return res.status(400).json({ error: "Required fields are missing" });
@@ -115,13 +115,11 @@ app.post("/signup", async (req, res) => {
     const usersCollection = db.collection("users");
 
     // Check if user exists
-    // Check if user exists with the same username AND user type
-const existingUser = await usersCollection.findOne({ username, type });
+    const existingUser = await usersCollection.findOne({ username, type });
 
 if (existingUser) {
-  return res.status(409).json({ error: "User with this username already exists for the same user type. Please use a different username." });
+  return res.status(409).json({ error: "User with this username already exists for the same user type. Please use a different username." });
 }
-
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
