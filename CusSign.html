@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/CusSign.css">
-    <title>EcoSwap</title>
+    <title>Customer Sign Up</title>
 </head>
 <body>
     <div class="container">
         <h2 class="brand-title">EcoSwap</h2>
-        <form id="loginForm" action="#" method="POST" novalidate>
+        <form id="signupForm">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <span class="error" id="usernameError">Username is required</span>
@@ -39,110 +39,9 @@
             <span class="error" id="addressError">Address is required</span>
 
             <button type="submit">Sign Up</button>
-            <p id="registrationMessage" style="display:none; color: green; margin-top: 10px;">Registration Successful!</p>
-
         </form>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("loginForm");
-    const registrationMessage = document.getElementById("registrationMessage");
-
-    form.addEventListener("submit", async function(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        let isValid = true;
-
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
-        const confirmPassword = document.getElementById("confirm_password").value.trim();
-        const aadhaar = document.getElementById("aadhaar").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const address = document.getElementById("address").value.trim();
-
-        // Validation logic (same as before)
-        if (username === "") {
-            document.getElementById("usernameError").style.display = "block";
-            isValid = false;
-        } else {
-            document.getElementById("usernameError").style.display = "none";
-        }
-
-        if (password.length < 6) {
-            document.getElementById("passwordError").style.display = "block";
-            isValid = false;
-        } else {
-            document.getElementById("passwordError").style.display = "none";
-        }
-
-        if (confirmPassword !== password) {
-            document.getElementById("confirmPasswordError").style.display = "block";
-            isValid = false;
-        } else {
-            document.getElementById("confirmPasswordError").style.display = "none";
-        }
-
-        if (!/^\d{12}$/.test(aadhaar)) {
-            document.getElementById("aadhaarError").style.display = "block";
-            isValid = false;
-        } else {
-            document.getElementById("aadhaarError").style.display = "none";
-        }
-
-        if (!/^[6-9]\d{9}$/.test(phone)) {
-            document.getElementById("phoneError").style.display = "block";
-            isValid = false;
-        } else {
-            document.getElementById("phoneError").style.display = "none";
-        }
-
-        if (!/\S+@\S+\.\S+/.test(email)) {
-            document.getElementById("emailError").style.display = "block";
-            isValid = false;
-        } else {
-            document.getElementById("emailError").style.display = "none";
-        }
-
-        if (address === "") {
-            document.getElementById("addressError").style.display = "block";
-            isValid = false;
-        } else {
-            document.getElementById("addressError").style.display = "none";
-        }
-
-        if (isValid) {
-            // Send data to your server for Supabase insertion
-            try {
-                const response = await fetch("http://localhost:5000/create-user", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ username: username }), // Send only the username
-                });
-
-                if (response.ok) {
-                    console.log("✅ User registration successful!");
-                    form.reset();
-                    registrationMessage.style.display = "block"; // Show success message
-                    setTimeout(() => {
-                        registrationMessage.style.display = "none";
-                    }, 3000); // Hide message after 3 seconds
-
-                } else {
-                    console.error("❌ User registration failed:", response.statusText);
-                    alert("Registration failed. Please try again."); // Simple alert
-                }
-            } catch (error) {
-                console.error("❌ Error during registration:", error);
-                alert("Registration failed. Please check your internet connection."); // Alert for network errors
-            }
-        }
-    });
-});
-    </script>
     <script src="CusSign.js"></script>
 </body>
 </html>
