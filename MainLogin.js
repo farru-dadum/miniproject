@@ -34,38 +34,43 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     if (!isValid) return;
 
     // Send Login Request
-    try {
-        const response = await fetch("http://localhost:5000/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password, userType }),
-        });
+   // Send Login Request
+try {
+    console.log("🔍 Sending Login Request:", { username, password, userType }); // Debugging
+    
+    const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password, userType }),
+    });
 
-        const data = await response.json();
+    const data = await response.json();
+    console.log("🔍 Server Response:", data); // Debugging
 
-        if (response.ok) {
-            alert("Login Successful!");
+    if (response.ok) {
+        alert("Login Successful!");
 
-            // ✅ Store username in localStorage
-            localStorage.setItem("username", username);
+        // ✅ Store username in localStorage
+        localStorage.setItem("username", username);
 
-            // Redirect based on user type
-            if (data.type === "customer") {
-                window.location.href = "CustLanding.html";
-            } else if (data.type === "scrap_collector") {
-                window.location.href = "scrap_dashboard.html";
-            } else if (data.type === "business") {
-                window.location.href = "business_dashboard.html";
-            } else {
-                alert("Invalid user type. Please contact support.");
-            }
+        // Redirect based on user type
+        if (data.type === "customer") {
+            window.location.href = "CustLanding.html";
+        } else if (data.type === "scrap_collector") {
+            window.location.href = "scrap_dashboard.html";
+        } else if (data.type === "business") {
+            window.location.href = "business_dashboard.html";
         } else {
-            alert(data.error || "Login Failed!");
+            alert("Invalid user type. Please contact support.");
         }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Server error. Please try again later.");
+    } else {
+        alert(data.error || "Login Failed!");
     }
+} catch (error) {
+    console.error("Error:", error);
+    alert("Server error. Please try again later.");
+}
+
 });
 
 // ✅ Signup Button Logic
