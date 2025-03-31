@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Landing Page</title>
+
+    <!-- ✅ Styles -->
+    <link rel="stylesheet" href="css/CustLanding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="wastelistingcard.css">
+    <link rel="stylesheet" href="CustInbox.css"> <!-- Link to Inbox CSS -->
+
+
+    <!-- ✅ Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- ✅ Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="section1">
+            <div class="content-box box1">
+                <img src="images/Eco Swap.png" alt="Eco Swap Icon">
+            </div>
+            <div class="content-box1 box2">EcoSwap</div>
+            <button id="logoutBtn">Logout</button>
+        </div>
+
+        <div class="section2">
+            <div class="content-box2" id="listingsLink">Listings</div>
+            <div class="content-box2" id="inboxLink">Inbox <span id="notificationCount"></span></div>
+        </div>
+
+        <div class="section3" id="listingsSection">
+            <button class="add-button" id="openModal">+ Add</button>
+            <div class="listings-container"></div>
+
+            <!-- ✅ Modal -->
+            <div id="addModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" id="closeModal">×</span>
+                    <h2>Add Waste Listing</h2>
+                    <form id="wasteForm">
+                        <label for="wasteType">Waste Type:</label>
+                        <input type="text" id="wasteType" required>
+
+                        <label for="wasteImages">Upload Images:</label>
+                        <input type="file" id="wasteImages" multiple accept="image/*">
+
+                        <label for="description">Description:</label>
+                        <textarea id="description" required></textarea>
+
+                        <label for="condition">Condition:</label>
+                        <input type="text" id="condition" required>
+
+                        <label for="locationName">Location:</label>
+                        <input type="text" id="locationName" required>
+
+                        <button type="button" id="getLocation">Use My Location</button>
+
+                        <!-- ✅ Map -->
+                        <div id="map" style="height: 300px; margin-top: 10px;"></div>
+
+                        <button type="submit" class="modal-submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="section3" id="inboxSection" style="display: none;">
+            <h1>Inbox</h1>
+            <ul id="inboxMessages">
+                <!-- Notifications will be displayed here -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- ✅ JavaScript File -->
+    <script src="CustLanding.js"></script>
+    <script src="wastelistingcard.js"></script>
+    <script src="CustInbox.js"></script> <!-- Link to Inbox JS -->
+    <script>
+        // CustLanding.js
+
+        // Assuming you have a way to fetch notifications and their details
+        async function fetchNotifications() {
+            // Replace with your actual data fetching logic (e.g., from Supabase)
+            // Example using a placeholder data source
+            const notifications = await getNotifications(); // Replace with your supabase call
+
+            // Display the notifications in the inbox
+            displayNotifications(notifications);
+
+            // Update the notification count
+            updateNotificationCount(notifications.length);
+        }
+
+
+        function displayNotifications(notifications) {
+            const inboxMessagesList = document.getElementById('inboxMessages');
+            inboxMessagesList.innerHTML = ''; // Clear previous messages
+
+            if (notifications.length === 0) {
+                inboxMessagesList.innerHTML = '<li><p>No new notifications.</p></li>';
+                return;
+            }
+
+            notifications.forEach(notification => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('inbox-message-item');
+
+                const notificationTime = new Date(notification.timestamp).toLocaleString();
+
+                let messageContent = '';
+                switch (notification.type) {
+                    case 'listing_claimed':
+                        messageContent = `<p>Your listing "${notification.listing_title}" has been claimed by a business!</p>`;
+                        break;
+                    case 'collector_assigned':
+                        messageContent = `<p>A scrap collector has been assigned to your listing "${notification.listing_title}".</p>
+                                          <p>Collector Details:</p>
+                                          <p>Name: ${notification.collector_name}</p>
+                                          <p>Phone: ${notification.collector_phone}</p>
+                                          ${notification.collector_image ? `<img src="${notification.collector_image}" alt="Collector Image" style="max-width: 100px;">` : ''}`;
+                        break;
+                    default:
+                        messageContent = `<p>${notification.message}</p>`;
+                        break;
+                }
+
+                listItem.innerHTML = `
+                    <div class="time-column">${notificationTime}</div>
+                    <div class="content-column">
+                        <div class="message-box">
+                            ${messageContent}
+                        </div>
+                    </div>
+                `;
+
+                inboxMessagesList.appendChild(listItem);
+            });
+        }
+
+        function updateNotificationCount(count) {
+            const notificationCountSpan = document.getElementById('notificationCount');
+            notificationCountSpan.textContent = count > 0 ? `(${count})` : '';
+            notificationCountSpan.style.display = count > 0 ? 'inline' : 'none'; // Show/hide based on count
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const listingsSection = document.getElementById('listingsSection');
+            const inboxSection = document.getElementById('inboxSection');
+            const listingsLink = document.getElementById('listingsLink');
+            const inboxLink = document.getElementById('inboxLink');
+
+
+            // Initially load notifications
+            fetchNotifications(); // Make sure this runs on page load
+
+            // Function to show a section and hide the other
+            function showSection(sectionToShow, linkToHighlight) {
+                if (sectionToShow === listingsSection) {
+                    listingsSection.style.display = 'block';
+                    inboxSection.style.display = 'none';
+                } else {
+                    listingsSection.style.display = 'none';
+                    inboxSection.style.display = 'block';
+                    // Fetch notifications when inbox is opened
+                    fetchNotifications();
+                }
+                listingsLink.classList.remove('active');
+                inboxLink.classList.remove('active');
+                linkToHighlight.classList.add('active');
+            }
+
+
+            // Event listeners for the Listings and Inbox links
+            listingsLink.addEventListener('click', () => {
+                showSection(listingsSection, listingsLink);
+            });
+
+            inboxLink.addEventListener('click', () => {
+                showSection(inboxSection, inboxLink);
+            });
+        });
+        // Mock function for fetching notifications.  Replace with your supabase call
+        async function getNotifications() {
+            // Simulate fetching data from an API or database
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve([
+                        {
+                            id: 1,
+                            type: 'listing_claimed',
+                            listing_title: 'Old Cardboard Boxes',
+                            timestamp: '2024-01-26T10:00:00Z'
+                        },
+                        {
+                            id: 2,
+                            type: 'collector_assigned',
+                            listing_title: 'Plastic Bottles',
+                            collector_name: 'John Doe',
+                            collector_phone: '123-456-7890',
+                            collector_image: 'images/collector_john.jpg', // Replace with actual image path
+                            timestamp: '2024-01-25T15:30:00Z'
+                        },
+                        {
+                            id: 3,
+                            type: 'general',
+                            message: 'Welcome to EcoSwap! Thank you for contributing to a greener future.',
+                            timestamp: '2024-01-24T08:00:00Z'
+                        }
+                    ]);
+                }, 500); // Simulate a delay of 0.5 seconds
+            });
+        }
+    </script>
+</body>
+</html>

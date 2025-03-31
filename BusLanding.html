@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSwap - Business Listings</title>
+
+    <!-- ✅ Styles -->
+    <link rel="stylesheet" href="css/BusLanding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- ✅ Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- ✅ Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <div class="container">
+        <div class="section1">
+            <div class="content-box box1">
+                <img src="images/Eco Swap.png" alt="Eco Swap Icon">
+            </div>
+            <div class="content-box1 box2">EcoSwap</div>
+            <button id="logoutBtn">Logout</button>
+        </div>
+
+        <div class="section2">
+            <div class="content-box2">All Listings</div>
+            <div class="content-box2">Inbox</div>
+        </div>
+
+        <div class="section3">
+            <input type="text" id="searchBar" placeholder="Search Listings...">
+            <div class="listings-container" id="listingsContainer"></div>
+            <div id="errorDisplay" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- ✅ JavaScript Files -->
+    <script src="BusLanding.js"></script>
+</body>
+</html>

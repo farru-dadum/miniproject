@@ -1,0 +1,55 @@
+/* CustInbox.css */
+#inboxSection {
+    padding: 20px;
+  }
+  
+  #inboxMessages {
+    margin-top: 15px;
+    list-style-type: disc; /* Added bullet points */
+    padding-left: 20px; /* Indent list items */
+  }
+  
+  .inbox-message-item {
+    display: flex;
+    margin-bottom: 25px; /* Increased line spacing between list items */
+  }
+  
+  .time-column {
+    width: 120px; /* Adjust as needed */
+    font-size: 0.8em;
+    color: #777;
+    text-align: left;
+    padding-right: 10px;
+  }
+  
+  .content-column {
+    flex: 1;
+  }
+  
+  .message-box {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .message-box p {
+    margin: 5px 0;
+  }
+  
+  #notificationCount {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 0.8em;
+    position: relative;
+    top: -5px;
+    left: 3px;
+  }
+  
+  /* Style for active link */
+  .section2 .content-box2.active {
+      background-color: #007bff;
+      color: white;
+  }

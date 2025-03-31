@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Manrope:wght@400;600&display=swap');
+
+/* CSS Variables for easier theming */
+:root {
+  --primary-color: #0a3d62;
+  --secondary-color: #555;
+  --background-color: #E4E2D7;
+  --font-family-main: 'Poppins', sans-serif;
+}
+
+/* General Reset and Base Styles */
+* {
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+/* Section1 - Header */
+.section1 {
+    min-height: 80px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/*image of eco swap*/
+.content-box1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 10px;
+    margin: 2px;
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+/* Adjust EcoSwap text */
+.box2 {
+    flex-grow: 0;
+    font-family: 'Irish Grover', cursive;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: black;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    white-space: nowrap;
+}
+
+/*icons*/
+.box3, .box4, .box5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    gap: 15px; /* Adds space between icons */
+}
+
+/* Circular icon styling */
+.content-box1 i {
+    font-size: 1.5rem;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.content-box1 i:hover {
+    transform: scale(1.1); /* Slightly enlarges the icon */
+    background-color: #f0f0f0; /* Light background change on hover */
+}
+
+/* Adjust last two boxes with some gap */
+.box6 {
+    flex-grow: 0;
+    font-family: var(--font-family-main);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    padding-right: 0px;
+    white-space: nowrap;
+    margin-right: 0px; /* Adds small gap between box6 & box7 */
+}
+
+.box7 {
+    flex-grow: 0;
+    font-family: var(--font-family-main);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    white-space: nowrap;
+    border: 0.5px solid #878680;  /* Consistent border */
+    border-radius: 0;           /* Remove specific radius */
+    height: 100px;
+}
+
+.section1 img {
+    max-width: 100%;    /* Make image responsive */
+    height: auto;
+    width: auto;         /* Remove fixed width */
+    max-height: 80px; /* Match .section1 height, if needed */
+}
+
+/* Section2 - Navbar */
+.section2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 40px;
+    background-color: var(--background-color);
+    color: black;
+    font-family: var(--font-family-main);
+    font-size: 1rem;
+    padding: 10px 30px;
+    gap: 20px;
+}
+
+/* Navbar Links */
+.content-box2 {
+    padding: 5px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    font-weight: 550;
+}
+
+/* Hover Effect */
+.content-box2:hover {
+    background-color: #d6d4c9;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Section3 - Listings */
+.section3 {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Listings Container */
+.listings-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: flex-start;
+}
+
+/* Listing Card */
+.listing-card {
+    width: 280px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.listing-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Listing Image */
+.listing-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Listing Details */
+.listing-details {
+    padding: 10px;
+    text-align: center;
+}
+
+.listing-details h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.listing-details p {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+/* Loading Overlay Styles */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    display: none; /* Hidden by default */
+}
+
+.loading-spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error Message Styles */
+.error-message {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+    display: none; /* Hidden by default */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .listing-card {
+        width: calc(50% - 10px); /* Two cards per row on smaller screens */
+    }
+    /* Adjust font sizes and padding as needed for smaller screens */
+    .section1 {
+        min-height: auto;
+        padding: 10px;
+    }
+
+    .box2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .listing-card {
+        width: 100%; /* One card per row on even smaller screens */
+    }
+}

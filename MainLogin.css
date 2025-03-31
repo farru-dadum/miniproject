@@ -147,3 +147,11 @@ button:hover {
     background: #0b5e3a;
     transform: scale(1.05);
 }
+
+.role-note {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    text-align: left;
+    line-height: 1.8;
+}

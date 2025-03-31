@@ -323,3 +323,133 @@
     color: #333;
     text-align: center;
 }
+/*section 3*/
+#listings {
+    max-width: 800px;
+    margin: auto;
+}
+
+#listing-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+button {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Listings Container */
+.listings-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: flex-start; /* Align to the left */
+}
+
+/* Individual Listing Card */
+.listing-card {
+    width: 280px; /* Adjust size */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.listing-card:hover {
+    transform: translateY(-5px); /* Slight lift effect */
+}
+
+/* Card Content */
+.card-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Waste Image */
+.listing-image {
+    width: 100%;
+    height: 180px; /* Adjust height */
+    object-fit: cover;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Listing Details */
+.listing-details h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #0a3d62;
+}
+
+.listing-details p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Status Styling */
+.claimed-text {
+    color: green;
+    font-weight: bold;
+}
+
+.deleted-text {
+    color: red;
+    font-weight: bold;
+}

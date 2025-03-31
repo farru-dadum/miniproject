@@ -5,17 +5,16 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(to right, #11998e, #38ef7d); /* Green gradient */
+    background: linear-gradient(to right, #11998e, #38ef7d);
     color: #ffffff;
     font-family: 'Lora', serif;
     padding: 20px;
     margin: 0;
 }
 
-/* Container Styling */
 .container {
     background: white;
-    color: #0e7c49; /* Dark green for contrast */
+    color: #0e7c49;
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
@@ -27,16 +26,14 @@ body {
     gap: 10px;
 }
 
-/* Stylish Brand Title */
 .brand-title {
     font-family: 'Dancing Script', cursive;
     font-size: 26px;
     text-align: center;
-    color: #0e7c49; /* Deep green */
+    color: #0e7c49;
     margin-bottom: 10px;
 }
 
-/* Form Layout */
 form {
     display: flex;
     flex-direction: column;
@@ -44,16 +41,14 @@ form {
     align-items: center;
 }
 
-/* Labels */
 label {
     font-weight: 600;
     font-size: 14px;
     width: 100%;
     text-align: left;
-    color: #085f38; /* Dark green */
+    color: #085f38;
 }
 
-/* Input Fields */
 input, textarea, select {
     width: 95%;
     padding: 8px;
@@ -65,22 +60,21 @@ input, textarea, select {
     outline: none;
     transition: 0.3s;
 }
+
 input:focus, textarea:focus, select:focus {
     border-color: #0e7c49;
     box-shadow: 0 0 5px rgba(14, 124, 73, 0.5);
 }
 
-/* Address Field Styling */
 textarea {
     resize: none;
     height: 60px;
 }
 
-/* Button Styling */
 button {
     width: 90%;
     padding: 12px;
-    background: #0e7c49; /* Green button */
+    background: #0e7c49;
     color: white;
     border: none;
     border-radius: 8px;
@@ -90,16 +84,17 @@ button {
     transition: 0.3s;
     margin-top: 10px;
 }
+
 button:hover {
     background: #0b5e3a;
     transform: scale(1.05);
 }
+
 button:focus {
     outline: none;
     box-shadow: 0 0 5px rgba(14, 124, 73, 0.5);
 }
 
-/* Error Messages */
 .error {
     color: red;
     font-size: 12px;
@@ -109,18 +104,17 @@ button:focus {
     width: 90%;
 }
 
-/* Radio Buttons */
 .radio-container {
     display: flex;
     gap: 10px;
     width: 100%;
 }
+
 .radio-container input[type="radio"] {
     margin: 0;
     transform: scale(1.1);
 }
 
-/* Mobile Responsiveness */
 @media screen and (max-width: 480px) {
     .container {
         max-width: 95%;
@@ -133,3 +127,4 @@ button:focus {
         font-size: 14px;
     }
 }
+
