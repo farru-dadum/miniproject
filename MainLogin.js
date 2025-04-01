@@ -59,9 +59,9 @@ document.getElementById("loginForm").addEventListener("submit", async function (
             if (data.type === "customer") {
                 window.location.href = "CustLanding.html";
             } else if (data.type === "scrap_collector") {
-                window.location.href = "scrap_dashboard.html";
+                window.location.href = "ScrapLanding.html";
             } else if (data.type === "business") {
-                window.location.href = "BusLanding.html";
+                window.location.href = "business_dashboard.html";
             } else {
                 alert("Invalid user type. Please contact support.");
             }

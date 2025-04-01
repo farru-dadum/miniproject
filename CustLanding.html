@@ -6,9 +6,10 @@
     <title>Customer Landing Page</title>
 
     <!-- ✅ Styles -->
-    <link rel="stylesheet" href="css/CustLanding.css">
+    <link rel="stylesheet" href="CustLanding.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <!-- ✅ Leaflet JS -->
@@ -21,7 +22,7 @@
     <div class="container">
         <div class="section1">
             <div class="content-box box1">
-                <img src="images/Eco Swap.png" alt="Eco Swap Icon">
+                <img src="Eco Swap.png" alt="Eco Swap Icon">
             </div>
             <div class="content-box1 box2">EcoSwap</div>
             <div class="content-box1 box3"><i class="fa-brands fa-twitter"></i></div>
@@ -70,10 +71,45 @@
         </div>
     </div>
     <div class="section3">
-        <div class="listings-container"></div> <!-- ✅ Container for Listings -->
+        <div class="listings-container">
+        </div> <!-- ✅ Container for Listings -->
+        <div id="editListingModal" class="editmodal">
+            <form id="editListingForm">
+                <div class="editmodal-content">
+                    <span class="close" onclick="closeEditModal()">&times;</span>
+                    <h2>Edit Waste Listing</h2>
+                    <input type="hidden" id="editListingId">
+            
+                    <label for="editWasteType">Waste Type:</label>
+                    <input type="text" id="editWasteType">
+            
+                    <label for="editDescription">Description:</label>
+                    <textarea id="editDescription"></textarea>
+            
+                    <label for="editCondition">Condition:</label>
+                    <input type="text" id="editCondition">
+
+                    <label for="editImage">Update Image:</label>
+                    <input type="file" id="editImage" multiple accept="image/*">
+
+            
+                    <label for="editLocation">Old Location:</label>
+                    <input type="text" id="editLocation">
+                    
+                    <label for="editlocationName">New Location:</label>
+                    <input type="text" id="editlocationName" required>
+                    <button type="button" id="editgetLocation">Use My Location</button>
+                    <div id="editmap" style="height: 300px; margin-top: 10px;"></div>
+            
+                    <button type="submit" id="edit-btn" onclick="saveEditListing()">Save Changes</button>
+                </div>
+            </form>
+        </div>
+        
+        </div>
     </div>
-    
     <!-- ✅ JavaScript File -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="CustLanding.js"></script>
 </body>
 </html>
