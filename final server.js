@@ -956,19 +956,36 @@ app.get("/get-config", (req, res) => {
 });
 
 // ✅ Fetch all waste listings for a business user (prioritize matching raw material)
+// ✅ Fetch all waste listings for scrap collectors/businesses (available and claimed)
 app.get("/listings/scrap", verifyToken, async (req, res) => {
   try {
-    // Fetch all available listings and ensure `username` is included
+    const { username: requestingUsername, type: userType } = req.user;
+
+    console.log(` M Fetching listings for ${userType} user: ${requestingUsername}`);
+
+    // Fetch listings with status "available" or "claimed", excluding user's own listings
     const listings = await listingsCollection
-      .find({ status: "available" })
-      .project({ username: 1, waste_type: 1, description: 1, condition: 1, location_name: 1, image_urls: 1, status: 1, claimed_by: 1 })
+      .find({
+        status: { $in: ["available", "claimed"] }, // Include both statuses
+        username: { $ne: requestingUsername } // Exclude own listings
+      })
+      .project({
+        username: 1,
+        waste_type: 1,
+        description: 1,
+        condition: 1,
+        location_name: 1,
+        image_urls: 1,
+        status: 1,
+        claimed_by: 1
+      })
+      .sort({ createdAt: -1 })
       .toArray();
 
-    console.log("Fetched Listings:", listings); // Debugging
-
+    console.log(` M Found ${listings.length} listings (available and claimed) for ${userType} user ${requestingUsername}.`);
     res.status(200).json(listings);
   } catch (error) {
-    console.error("❌ Error fetching business listings:", error);
+    console.error("❌ Error fetching scrap listings:", error);
     res.status(500).json({ error: "Failed to fetch listings" });
   }
 });
@@ -1090,6 +1107,47 @@ app.get("/users/businesses", verifyToken, async (req, res) => {
   } catch (error) {
     console.error(`❌ Error fetching business users for ${req.user?.username}:`, error);
     res.status(500).json({ error: "Failed to fetch business users due to a server error." });
+  }
+});
+
+// ✅ Fetch only the requesting scrap collector's claimed listings
+app.get("/listings/claimed/mine", verifyToken, async (req, res) => {
+  try {
+    const { username: requestingUsername, type: userType } = req.user;
+
+    console.log(` M Fetching claimed listings for ${userType} user: ${requestingUsername}`);
+
+    // Restrict to scrap collectors only
+    if (userType !== "scrap_collector") {
+      console.warn(` M Access denied: User ${requestingUsername} (type: ${userType}) attempted to access scrap collector claimed listings.`);
+      return res.status(403).json({ error: "Forbidden: This endpoint is only for scrap collectors." });
+    }
+
+    // Fetch listings claimed by the requesting user
+    const listings = await listingsCollection
+      .find({
+        status: "claimed",
+        claimed_by: requestingUsername // Only listings claimed by this user
+      })
+      .project({
+        username: 1,
+        waste_type: 1,
+        description: 1,
+        condition: 1,
+        location_name: 1,
+        image_urls: 1,
+        status: 1,
+        claimed_by: 1,
+        updatedAt: 1
+      })
+      .sort({ updatedAt: -1 }) // Sort by claim time (most recent first)
+      .toArray();
+
+    console.log(` M Found ${listings.length} claimed listings for scrap collector ${requestingUsername}.`);
+    res.status(200).json(listings);
+  } catch (error) {
+    console.error("❌ Error fetching user's claimed listings:", error);
+    res.status(500).json({ error: "Failed to fetch your claimed listings" });
   }
 });
 
