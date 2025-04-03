@@ -13,7 +13,7 @@
     flex-wrap: wrap;
 }
 
-/* Section1 - top most paert */
+/* Section1 - top most part */
 .section1 {
     min-height: 80px;
     background-color: white;
@@ -81,7 +81,6 @@
     background-color: #f0f0f0; /* Light background change on hover */
 }
 
-
 /* Adjust last two boxes with some gap */
 .box6 {
     flex-grow: 0;
@@ -113,7 +112,6 @@
     height: auto; /* Maintains aspect ratio */
 }
 
-
 .section2 {
     display: flex;
     justify-content: flex-start; /* Align content to the left */
@@ -141,6 +139,7 @@
     transform: scale(1.1);
     cursor: pointer;
 }
+
 /* Section 3 */
 .section3 {
     min-height: 250px;
@@ -207,7 +206,6 @@
     width: fit-content; /* Prevents stretching */
 }
 
-
 .content-box3 h1 {
     font-family: 'Covered By Your Grace', cursive;
     font-size: 2.5rem; /* Adjust size as needed */
@@ -236,6 +234,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative; /* For popup positioning */
 }
 
 .feature:hover {
@@ -244,14 +243,14 @@
 }
 
 .feature h1 {
-    font-family:'Covered By Your Grace', cursive;
+    font-family: 'Covered By Your Grace', cursive;
     font-size: 1.6rem;
     margin-bottom: 8px;
     color: #EEC044;
 }
 
 .feature p {
-    font-family:'Manrope', sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-size: 1rem;
     margin-bottom: 12px;
     color: #1F1E17;
@@ -273,6 +272,43 @@
     transform: scale(1.05); /* Gentle zoom effect */
     filter: brightness(1) contrast(1) saturate(1); /* Restores original colors */
     box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
+}
+
+/* Popup Styling */
+.feature .popup {
+    visibility: hidden;
+    width: 250px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 110%; /* Position above the feature box */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9rem;
+}
+
+.feature:hover .popup {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Popup Arrow */
+.feature .popup::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
 }
 
 .section4 {
@@ -331,15 +367,16 @@
     text-align: center;
     padding: 20px;
 }
-/* 🌍 Responsive Design */
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .section1, .section2, .section3, .section4, .section5, .section6, .section7 {
+    .section1, .section2, .section3, .section4, .section5, .section6 {
         min-height: 200px;
     }
 }
 
 @media (max-width: 480px) {
-    .section1, .section2, .section3, .section4, .section5, .section6, .section7 {
+    .section1, .section2, .section3, .section4, .section5, .section6 {
         min-height: 150px;
     }
 }
